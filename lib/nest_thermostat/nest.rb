@@ -56,7 +56,7 @@ module NestThermostat
     end
 
     def schedule_mode
-      status["schedule"]["schedule_mode"]
+      status["schedule"][self.device_id]["schedule_mode"]
     end
 
     def leaf
