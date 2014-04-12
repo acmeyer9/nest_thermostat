@@ -55,6 +55,10 @@ module NestThermostat
       status["track"][self.device_id]["last_ip"].strip
     end
 
+    def schedule_mode
+      status["schedule"]["schedule_mode"]
+    end
+
     def leaf
       status["device"][self.device_id]["leaf"]
     end
