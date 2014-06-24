@@ -72,7 +72,7 @@ module NestThermostat
     def can_cool=(state)
       request = HTTParty.post(
         "#{self.transport_url}/v2/put/shared.#{self.device_id}",
-        body: %Q({"can_cool":true}),
+        body: %Q({"can_cool":#{state}}),
         headers: self.headers
       ) rescue nil
     end
