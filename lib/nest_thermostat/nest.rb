@@ -59,6 +59,24 @@ module NestThermostat
       status["schedule"][self.device_id]["schedule_mode"]
     end
 
+    def schedule_mode=(state)
+      if state == "HEAT" || state == "COOL"
+        HTTParty.post(
+          "#{self.transport_url}/v2/put/schedule.#{self.device_id}",
+          body: %Q({"schedule_mode":"#{state}"}),
+          headers: self.headers
+        ) rescue nil
+      end
+    end
+
+    def can_cool=(state)
+      request = HTTParty.post(
+        "#{self.transport_url}/v2/put/shared.#{self.device_id}",
+        body: %Q({"can_cool":true}),
+        headers: self.headers
+      ) rescue nil
+    end
+
     def leaf
       status["device"][self.device_id]["leaf"]
     end
